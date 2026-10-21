@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adoções — Anjos da Proteção Animal</title>
+  <meta name="description" content="Conheça os cães e gatos resgatados pela ONG que estão disponíveis para adoção responsável.">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ Cabeçalho ============ -->
+  <header class="topo">
+    <div class="container topo-inner">
+      <a class="marca" href="index.html">
+        <img src="assets/img/favicon.svg" alt="Logotipo da ONG">
+        <span data-ong-nome>Anjos da Proteção Animal</span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <button class="btn-menu-mobile" data-btn-menu aria-expanded="false" aria-label="Abrir menu">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <ul class="menu" data-menu>
+          <li><a href="index.html#como-ajudar">Como ajudar</a></li>
+          <li><a href="index.html#campanhas">Campanhas</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+          <li><a class="btn btn-primary btn-sm" href="index.html#doar">Apoie agora</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ Cabeçalho da página ============ -->
+    <section class="pagina-head">
+      <div class="container">
+        <h1>Adote um amigo</h1>
+        <p class="lede">
+          Todos os animais abaixo foram resgatados, estão saudáveis e esperam
+          por um lar. Use os filtros para encontrar o perfil ideal para a sua rotina.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ Barra de filtros ============ -->
+    <div class="filtros" role="search" aria-label="Filtros da vitrine de adoção">
+      <div class="container filtros-inner">
+        <input class="busca" data-f-busca type="search" placeholder="Buscar por nome..." aria-label="Buscar animal por nome">
+
+        <div class="chips" role="group" aria-label="Filtrar por espécie">
+          <button class="chip" data-f-especie="todos" aria-pressed="true">Todos</button>
+          <button class="chip" data-f-especie="cao" aria-pressed="false">Cães</button>
+          <button class="chip" data-f-especie="gato" aria-pressed="false">Gatos</button>
+        </div>
+
+        <select data-f-porte aria-label="Filtrar por porte">
+          <option value="todos">Porte: todos</option>
+          <option value="pequeno">Pequeno</option>
+          <option value="medio">Médio</option>
+          <option value="grande">Grande</option>
+        </select>
+
+        <select data-f-faixa aria-label="Filtrar por faixa de idade">
+          <option value="todos">Idade: todas</option>
+          <option value="filhote">Filhote (até 1 ano)</option>
+          <option value="adulto">Adulto</option>
+          <option value="idoso">Sênior (8+ anos)</option>
+        </select>
+
+        <select data-f-sexo aria-label="Filtrar por sexo">
+          <option value="todos">Sexo: todos</option>
+          <option value="femea">Fêmea</option>
+          <option value="macho">Macho</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ============ Vitrine completa ============ -->
+    <section style="padding-top:1rem">
+      <div class="container">
+        <p class="resultado-info" data-contador aria-live="polite">Carregando...</p>
+        <!-- Cards preenchidos automaticamente por js/app.js. -->
+        <div class="vitrine-grid" data-vitrine-completa>
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+        </div>
+
+        <div style="margin-top:3rem;text-align:center">
+          <h2 style="margin-bottom:.5rem">Não encontrou o seu par?</h2>
+          <p style="color:var(--muted)">Novos resgatados chegam toda semana. Fale com a gente e deixe seu perfil de adotante.</p>
+          <a class="btn btn-outline" data-whatsapp-link style="margin-top:1rem;display:inline-flex" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Rodapé ============ -->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape-grid">
+        <div>
+          <a class="marca" href="index.html">
+            <img src="assets/img/favicon.svg" alt="">
+            <span data-ong-nome>Anjos da Proteção Animal</span>
+          </a>
+          <p>Proteção e adoção responsável desde <span data-desde>2015</span>. CNPJ <span data-cnpj></span>.</p>
+        </div>
+        <div>
+          <h4>Navegue</h4>
+          <ul>
+            <li><a href="index.html#como-ajudar">Como ajudar</a></li>
+            <li><a href="index.html#campanhas">Campanhas</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Redes</h4>
+          <ul>
+            <li><a href="https://instagram.com/anjosdaprotecaoanimal" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://facebook.com/anjosdaprotecaoanimal" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a data-whatsapp-link href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="base">
+        <span>© <span data-ano-atual></span> <span data-ong-nome>Anjos da Proteção Animal</span>. Todos os direitos reservados.</span>
+        <span><a href="index.html" style="text-decoration:none">Voltar ao início</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

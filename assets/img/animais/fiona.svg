@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Foto de fiona">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E3C79A"/>
+      <stop offset="1" stop-color="#CFA463"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <g fill="#FFFFFF" opacity="0.55" transform="translate(400 290) scale(2.2) translate(-50 -45)">
+    <ellipse cx="50" cy="68" rx="26" ry="22"/>
+    <ellipse cx="20" cy="40" rx="11" ry="14"/>
+    <ellipse cx="42" cy="26" rx="11" ry="15"/>
+    <ellipse cx="64" cy="28" rx="11" ry="15"/>
+    <ellipse cx="83" cy="42" rx="10" ry="13"/>
+  </g>
+  <text x="400" y="540" text-anchor="middle" font-family="system-ui, sans-serif" font-size="26" fill="#FFFFFF" opacity="0.75">substitua por foto real</text>
+</svg>

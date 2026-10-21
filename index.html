@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anjos da Proteção Animal — Proteção e adoção responsável</title>
+  <meta name="description" content="ONG de proteção animal: resgate, cuidado e adoção responsável de cães e gatos. Adote, doe ou seja voluntário.">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ Cabeçalho ============ -->
+  <header class="topo">
+    <div class="container topo-inner">
+      <a class="marca" href="#inicio">
+        <img src="assets/img/favicon.svg" alt="Logotipo da ONG">
+        <span data-ong-nome>Anjos da Proteção Animal</span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <button class="btn-menu-mobile" data-btn-menu aria-expanded="false" aria-label="Abrir menu">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <ul class="menu" data-menu>
+          <li><a href="#como-ajudar">Como ajudar</a></li>
+          <li><a href="#adocao">Adoções</a></li>
+          <li><a href="#campanhas">Campanhas</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li><a class="btn btn-primary btn-sm" href="#doar">Apoie agora</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ Hero ============ -->
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="tagline">Adoção responsável desde <span data-desde>2015</span></span>
+          <h1>Cada pata merece uma <em>segunda chance</em>.</h1>
+          <p class="lede">
+            Resgatamos, cuidamos e encaminhamos cães e gatos abandonados para
+            lares responsáveis. Adote, doe ou seja voluntário — existem
+            muitas formas de mudar esta história.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#adocao">Quero adotar</a>
+            <a class="btn btn-outline" href="#doar">Quero doar</a>
+          </div>
+          <p class="hero-nota">
+            As visitas aos animais acontecem <strong data-ong-horario-inner>aos sábados, com agendamento</strong> —
+            fale com a gente pelo WhatsApp.
+          </p>
+        </div>
+        <div class="hero-fig" aria-hidden="true">
+          <figure><img src="assets/img/animais/thor.svg" alt=""></figure>
+          <figure><img src="assets/img/animais/luna.svg" alt=""></figure>
+          <figure><img src="assets/img/animais/fiona.svg" alt=""></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Impacto ============ -->
+    <section class="impacto" aria-label="Nossos números">
+      <div class="container">
+        <!-- ATENÇÃO: atualize estes números periodicamente. Veja docs/MANUTENCAO.md -->
+        <ul>
+          <li><strong>+320</strong> <span>animais resgatados</span></li>
+          <li><strong>+210</strong> <span>adoções realizadas</span></li>
+          <li><strong>45</strong> <span>empresas e parceiros</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ Como ajudar ============ -->
+    <section id="como-ajudar">
+      <div class="container">
+        <div class="section-head">
+          <h2>Como você pode ajudar</h2>
+          <p>Escolha o caminho que fizer mais sentido para você — todos eles transformam vidas.</p>
+        </div>
+        <div class="ajudar-grid">
+          <article class="ajudar-card destaque reveal">
+            <div class="ajudar-foto"><img src="assets/img/animais/bidu.svg" alt="Cão aguardando adoção"></div>
+            <div>
+              <p class="rotulo">Adoção</p>
+              <h3>Dê um lar a um resgatado</h3>
+              <p>
+                Conheça os cães e gatos que já estão vacinados, tratados e prontos
+                para uma família. A gente acompanha a adaptação junto com você.
+              </p>
+              <a class="btn btn-primary" href="adocao.html">Ver quem espera um lar</a>
+            </div>
+          </article>
+          <article class="ajudar-card reveal" id="doar">
+            <p class="rotulo">Doação</p>
+            <h3>Apoie com qualquer valor</h3>
+            <p>
+              Sua doação vira ração, veterinário, medicação e castração.
+              Chave Pix: <strong><span data-pix></span></strong>
+            </p>
+            <button class="btn btn-outline btn-sm" type="button" data-copiar-pix>Copiar chave Pix</button>
+          </article>
+          <article class="ajudar-card reveal">
+            <p class="rotulo">Voluntariado</p>
+            <h3>Doe seu tempo</h3>
+            <p>
+              Passeio, transporte, eventos, fotografia ou cuidados diários —
+              toda ajuda é bem-vinda e faz diferença real.
+            </p>
+            <a class="btn btn-ghost btn-sm" href="#contato">Quero ser voluntário</a>
+          </article>
+          <article class="ajudar-card reveal">
+            <p class="rotulo">Empresas</p>
+            <h3>Parceria corporativa</h3>
+            <p>
+              Patrocínio de campanhas, vaquinhas solidárias, mutirões de
+              castração e ações de engajamento com seu time.
+            </p>
+            <a class="btn btn-ghost btn-sm" href="#contato">Falar com a gente</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Vitrine de adoção (prévia) ============ -->
+    <section class="faixa-campanhas" id="adocao">
+      <div class="container">
+        <div class="section-head" style="display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap">
+          <div>
+            <h2>Alguém aqui espera por você</h2>
+            <p>Conheça parte dos nossos resgatados disponíveis para adoção.</p>
+          </div>
+          <a class="btn btn-ghost btn-sm" href="adocao.html">Ver todos os animais</a>
+        </div>
+        <!-- Os cards abaixo são preenchidos automaticamente por js/app.js
+             a partir de js/data.js (ou da planilha Google Sheets). -->
+        <div class="vitrine-grid" data-vitrine data-limite="6">
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Como funciona a adoção ============ -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Como funciona a adoção</h2>
+          <p>Um processo simples, transparente e com acompanhamento — para o bem de todos.</p>
+        </div>
+        <div class="passos">
+          <ol>
+            <li class="reveal"><h3>1. Escolha seu candidato</h3><p>Navegue pela vitrine e observe porte, energia e história — o perfil precisa combinar com a sua rotina.</p></li>
+            <li class="reveal"><h3>2. Fale com a gente</h3><p>Clique em “Quero adotar” para conversar por WhatsApp e preencher o formulário de interesse.</p></li>
+            <li class="reveal"><h3>3. Visita e entrevista</h3><p>Conheça o animal pessoalmente e converse com nossa equipe sobre rotina, espaço e expectativas.</p></li>
+            <li class="reveal"><h3>4. Lar e pós-adoção</h3><p>Leve seu novo amigo para casa. A gente continua por perto, acompanhando a adaptação.</p></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Campanhas ============ -->
+    <section class="faixa-campanhas" id="campanhas">
+      <div class="container">
+        <div class="section-head">
+          <h2>Campanhas em andamento</h2>
+          <p>Metas claras e impacto mensurável — acompanhe cada campanha de perto.</p>
+        </div>
+        <!-- Preenchido automaticamente a partir de js/data.js (CAMPANHAS). -->
+        <div class="campanha-destaque" data-campanha-destaque></div>
+        <ul class="campanhas-lista" data-campanhas-lista></ul>
+      </div>
+    </section>
+
+    <!-- ============ Contato ============ -->
+    <section id="contato">
+      <div class="container contato-grid">
+        <div class="contato-info">
+          <h2>Fale com a gente</h2>
+          <p class="lede">Dúvidas sobre adoção, doações ou parcerias? Estamos por aqui.</p>
+          <ul>
+            <li>
+              <span class="ico" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.12 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              <div><strong>WhatsApp (adote ou tire dúvidas)</strong><span><a data-whatsapp-link href="#" target="_blank" rel="noopener">Abrir conversa</a></span></div>
+            </li>
+            <li>
+              <span class="ico" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              </span>
+              <div><strong>E-mail</strong><span>contato@anjosdaprotecaoanimal.org.br</span></div>
+            </li>
+            <li>
+              <span class="ico" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <div><strong>Endereço</strong><span>Rua Exemplo, 123 — Bairro, Cidade/UF</span></div>
+            </li>
+            <li>
+              <span class="ico" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </span>
+              <div><strong>Horário de visitas</strong><span>Sábados, 9h às 15h (agendadas)</span></div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Este formulário abre o e-mail da ONG com a mensagem pronta —
+             não precisa de servidor. Para alternativa com Google Forms
+             ou Formspree, veja docs/MANUTENCAO.md. -->
+        <form class="form-card" data-form-contato aria-label="Formulário de contato">
+          <h3>Envie uma mensagem</h3>
+          <div class="form-grid" style="margin-top:1.2rem">
+            <div class="campo">
+              <label for="c-nome">Nome*</label>
+              <input id="c-nome" name="nome" type="text" required autocomplete="name">
+            </div>
+            <div class="campo">
+              <label for="c-email">E-mail*</label>
+              <input id="c-email" name="email" type="email" required autocomplete="email">
+            </div>
+            <div class="campo">
+              <label for="c-tel">Telefone / WhatsApp</label>
+              <input id="c-tel" name="telefone" type="tel" autocomplete="tel" placeholder="(11) 9 9999-9999">
+            </div>
+            <div class="campo">
+              <label for="c-assunto">Assunto</label>
+              <select id="c-assunto" name="assunto">
+                <option>Quero adotar</option>
+                <option>Fazer uma doação</option>
+                <option>Ser voluntário</option>
+                <option>Parceria empresarial</option>
+                <option>Outro assunto</option>
+              </select>
+            </div>
+            <div class="campo full">
+              <label for="c-msg">Mensagem*</label>
+              <textarea id="c-msg" name="mensagem" required placeholder="Conte pra gente como você quer ajudar..."></textarea>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+          <p class="form-note">Ao enviar, seu aplicativo de e-mail abre com a mensagem pronta para revisão.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Rodapé ============ -->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape-grid">
+        <div>
+          <a class="marca" href="#inicio">
+            <img src="assets/img/favicon.svg" alt="">
+            <span data-ong-nome>Anjos da Proteção Animal</span>
+          </a>
+          <p>Proteção e adoção responsável desde <span data-desde>2015</span>. CNPJ <span data-cnpj></span>.</p>
+        </div>
+        <div>
+          <h4>Navegue</h4>
+          <ul>
+            <li><a href="#como-ajudar">Como ajudar</a></li>
+            <li><a href="adocao.html">Adoções</a></li>
+            <li><a href="#campanhas">Campanhas</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Redes</h4>
+          <ul>
+            <li><a href="https://instagram.com/anjosdaprotecaoanimal" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://facebook.com/anjosdaprotecaoanimal" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a data-whatsapp-link href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="base">
+        <span>© <span data-ano-atual></span> <span data-ong-nome>Anjos da Proteção Animal</span>. Todos os direitos reservados.</span>
+        <span>Feito com carinho para quem tem quatro patas.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
