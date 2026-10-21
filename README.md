@@ -1,5 +1,8 @@
 # Site da ONG Anjos da Proteção Animal
 
+- Site no ar: https://anjos-da-protecao-animal.vercel.app
+- Repositório: https://github.com/lucasAlexsanderr/anjos-da-protecao-animal
+
 Landing page responsiva para uma ONG de proteção animal: vitrine de
 adoção, campanhas, doações (Pix) e contato. Site 100% estático — sem
 servidor, sem dependências além das fontes do Google Fonts.
