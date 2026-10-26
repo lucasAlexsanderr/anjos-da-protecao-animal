@@ -37,7 +37,15 @@ planilha Google Sheets (modo "sheets", veja `docs/GOOGLE-SHEETS.md`).
 
 ---
 
-## 2. Cadastrar ou remover um animal (modo "local" — padrão)
+## 2. Cadastrar ou remover um animal
+
+> **Estado atual:** o site está no modo `"sheets"` — os animais vêm
+> da planilha de microchipagem no Google Sheets. Nesse modo, animais
+> são cadastrados/editados **na própria planilha** (Nome e Espécie
+> preenchidos = entra na vitrine). O que está descrito abaixo vale
+> para o modo `"local"` (plano B), ativado trocando
+> `CONFIG.fonteDeDados` para `"local"` em `js/config.js`.
+> Detalhes completos: `docs/GOOGLE-SHEETS.md`.
 
 ### 2.1 Adicionar a foto
 

@@ -1,138 +1,91 @@
-# Integração com Google Sheets
+# Integração com Google Sheets (planilha de microchipagem)
 
-O banco de dados dos animais será mantido em uma planilha **Google
-Sheets**. O site já está preparado para isso: a leitura da planilha está
-implementada em `js/app.js` e é ativada trocando **uma linha** de
-configuração.
+A vitrine de adoção é alimentada pela planilha real de microchipagem
+dos animais, mantida no Google Sheets. **Não é preciso editar a
+planilha nem "publicar na web"** — basta que ela esteja compartilhada
+como "qualquer pessoa com o link pode visualizar" (como já está).
 
-Existem dois modos:
-
-| Modo        | Onde ficam os dados            | Quando usar                     |
-|-------------|--------------------------------|---------------------------------|
-| `"local"`   | Array em `js/data.js`         | Hoje (planilha ainda não existe) |
-| `"sheets"`  | Planilha Google Sheets        | Quando a planilha estiver pronta |
+- Planilha: "Planilha de microchipagem de Animais" (aba/gid 1524271065)
+- Configuração no site: `js/config.js` → `CONFIG.sheets.planilhaUrl`
+- Fonte ativa: `CONFIG.fonteDeDados: "sheets"`
 
 ---
 
-## 1. Criar a planilha
+## 1. Como o site lê a planilha (sem back-end)
 
-1. Crie uma planilha nova em sheets.google.com.
-2. Renomeie a primeira aba para `animais` (exatamente assim, sem acento).
-3. Na **linha 1**, crie o cabeçalho com ESTAS colunas, nesta ordem
-   (o site encontra as colunas pelo nome, em minúsculas):
+Ao abrir o site, o navegador busca os dados direto do Google:
 
-| Coluna        | Conteúdo                                            | Exemplo               |
-|---------------|-----------------------------------------------------|-----------------------|
-| `id`          | número único                                        | `9`                   |
-| `nome`        | nome do animal                                      | `Rex`                 |
-| `especie`     | `cao` ou `gato`                                     | `cao`                 |
-| `porte`       | `pequeno`, `medio` ou `grande`                      | `medio`               |
-| `idademeses`  | idade em meses (só número)                          | `18`                  |
-| `sexo`        | `femea` ou `macho`                                  | `macho`               |
-| `castrado`    | `sim` ou `nao`                                      | `sim`                 |
-| `vacinado`    | `sim` ou `nao`                                      | `sim`                 |
-| `descricao`   | 1–2 frases sobre o animal                           | `Calmíssimo, ama...`  |
-| `foto`        | URL pública da foto OU caminho local                | ver observação abaixo |
-| `status`      | `disponivel`, `urgente` ou `adotado`                | `disponivel`          |
+1. **CSV de exportação** (fonte primária):
+   `https://docs.google.com/spreadsheets/d/<ID>/export?format=csv&gid=<GID>`
+   via `fetch()`. O Google permite esse acesso entre origens (CORS)
+   quando a planilha está compartilhada por link. Retorna os dados
+   completos, inclusive valores de texto na coluna numérica "Idade"
+   (ex.: "MESES" = filhote).
+2. **Endpoint gviz via JSONP** (fallback automático): se o CSV falhar,
+   o site carrega o endpoint `gviz/tq` com uma tag `<script>`. Esse
+   caminho ignora restrições de CORS, mas o gviz descarta valores não
+   numéricos de colunas numéricas — os filhotes "MESES" aparecem como
+   "idade não informada" quando ele é usado.
 
-4. A partir da linha 2, cadastre um animal por linha.
+Cada visitante recebe os dados no ato: qualquer alteração na planilha
+aparece no site em minutos (o Google mantém um cache curto).
 
-### Sobre a coluna `foto`
+## 2. Como a planilha é interpretada (normalização)
 
-- **Opção A (mais simples):** hospede a foto em um serviço com link
-  direto (ex.: postar no Instagram da ONG não serve; use GitHub, Drive
-  compartilhado "qualquer pessoa com o link" ou Imgur) e cole a URL
-  completa na planilha, ex.: `https://.../rex.jpg`.
-- **Opção B (local):** salve a foto em `assets/img/animais/rex.jpg`
-  junto do site e escreva o caminho: `assets/img/animais/rex.jpg`.
+A planilha não foi desenhada para o site, então o código traduz as
+colunas e os valores, tolerando variações de grafia:
 
----
+| Coluna da planilha  | Como o site usa                                            |
+|---------------------|-------------------------------------------------------------|
+| Nome                | Nome do card (convertido para Capitalizada)                 |
+| Espécie             | FELINO → Gato · CANINO/CANINA/DOG → Cão                     |
+| Sexo                | FEMEA → Fêmea · MACHO → Macho                               |
+| Idade               | número em ANOS → "N anos" · "MESES" → "Filhote" · vazio → "Idade não informada" |
+| Porte               | PEQUENO/MEDIO/GRANDE (maioria vazia → não exibido)          |
+| Comportamento       | DÓCIL/DOCIL → "Dócil e tranquilo(a)" · BRAVA/BRAVO → "Bravo(a)" · ARISCA/ARISCO → "Arisco(a)" · TEMPERAMENTAL |
+| Castração / Vacinação | SIM → chips "Castrado" / "Vacinado" no card              |
+| Cor                 | Chip adicional no card (ex.: "Rajada")                      |
+| Doença Crônica      | Se preenchida (e não for "NÃO"), entra na descrição: "precisa de acompanhamento veterinário: ..." |
 
-## 2. Publicar a planilha na web (gerar o link CSV)
+Regras de exclusão:
 
-O site lê a planilha por meio de um link **público em formato CSV**:
+- Linhas sem **Nome** ou sem **Espécie** reconhecível não entram na
+  vitrine.
+- Como a planilha não tem colunas de foto e status: todos recebem
+  foto placeholder por espécie (`assets/img/animais/sem-foto-*.svg`)
+  e status "disponível".
 
-1. Na planilha: **Arquivo → Compartilhar → Publicar na web**.
-2. Em "Conteúdo publicado", escolha a aba **animais**.
-3. Formato: **Valores separados por vírgulas (.csv)**.
-4. Clique em **Publicar** e copie a URL gerada
-   (algo como `https://docs.google.com/spreadsheets/d/e/.../pub?output=csv`).
+## 3. Filtros da página de adoção x dados reais
 
-> Atenção: "Publicar na web" é diferente de "Compartilhar". O link de
-> publicação mostra apenas o conteúdo da aba publicada, no formato CSV.
-> Qualquer pessoa com o link consegue VER os dados publicados — por isso
-> a planilha não deve conter dados sensíveis (endereços de adotantes,
-> telefones etc.).
+- **Espécie/sexo**: funcionam para todos (dados sempre presentes).
+- **Porte**: só os poucos animais com porte preenchido aparecem ao
+  filtrar.
+- **Idade (faixa)**: filhotes ("MESES") e idosos (8+ anos) são
+  filtráveis; animais sem idade informada aparecem apenas em
+  "todas as idades".
 
----
+## 4. Se algo der errado
 
-## 3. Ativar a integração no site
+| Problema                                  | Causa provável / ação                                                                 |
+|--------------------------------------------|----------------------------------------------------------------------------------------|
+| Vitrine mostra mensagem de erro            | Compartilhamento da planilha mudou de "qualquer pessoa com o link" para restrito        |
+| Filhotes aparecem como "idade não informada" | O fallback gviz foi usado (CSV bloqueado). Recarregue; se persistir, verifique o item acima |
+| Animal novo não aparece                    | Confira se a linha tem Nome e Espécie preenchidos; aguarde o cache do Google (minutos)   |
+| Nome com grafia estranha no card           | O site capitaliza o texto como está na planilha — corrija na planilha                    |
 
-Abra `js/config.js` e altere:
+Plano B: se a planilha sair do ar definitivamente, troque
+`fonteDeDados` para `"local"` em `js/config.js` — a vitrine volta a
+usar o array `ANIMAIS` em `js/data.js`.
 
-```js
-fonteDeDados: "sheets",
+## 5. Registro técnico (para a disciplina)
 
-sheets: {
-  csvUrl: "COLE AQUI A URL DE PUBLICAÇÃO CSV",
-},
-```
-
-Pronto. Salve, recarregue o site e a vitrine passa a ler os animais da
-planilha.
-
-> Como o CSV é lido no navegador do visitante, a atualização é quase
-  imediata: cada visitante novo vê a versão mais recente da planilha
-  (o Google pode manter um cache de até alguns minutos).
-
----
-
-## 4. Como cadastrar animais daí em diante
-
-Tudo passa a ser feito **na planilha** — não é preciso tocar no código:
-
-- **Novo animal:** adicione uma linha com todas as colunas preenchidas.
-- **Adotado:** troque o `status` da linha para `adotado` (ele sai da
-  vitrine automaticamente).
-- **Urgente:** troque o `status` para `urgente` (ganha selo vermelho).
-- **Removido:** apague a linha.
-
-Cuidados:
-
-- Não renomeie o cabeçalho nem mude a ordem das colunas com o site
-  dependendo delas (o site procura pelo nome da coluna; nomes errados
-  quebram o campo correspondente).
-- Não deixe linhas em branco no meio da tabela.
-- Use `sim`/`nao` nas colunas castrado/vacinado e escreva `idademeses`
-  apenas com o número (18, não "1 ano e meio").
-
----
-
-## 5. Se algo der errado
-
-| Problema                                          | O que verificar                                                                 |
-|---------------------------------------------------|---------------------------------------------------------------------------------|
-| Vitrine vazia / mensagem de erro                  | O Console do navegador (F12) mostra o motivo; normalmente a URL do CSV está errada ou a publicação foi desfeita |
-| Animal não aparece                                | Colunas do cabeçalho escritas diferente do padrão; status inválido              |
-| Foto não carrega                                  | URL da foto não é pública ou o caminho local está errado                        |
-| Idade estranha                                     | `idademeses` com texto em vez de número                                         |
-
-Se precisar voltar ao modo anterior rapidamente, basta trocar
-`fonteDeDados` de volta para `"local"` — o array em `js/data.js` volta
-a alimentar o site.
-
----
-
-## 6. Alternativa técnica (registro, para a disciplina)
-
-O site consome o endpoint de publicação CSV do Google Sheets
-(`docs.google.com/spreadsheets/d/e/.../pub?output=csv`) via `fetch()`,
-com um parser CSV próprio que suporta campos entre aspas
-(`js/app.js`, função `parseCSVAnimais`). Nenhuma API key é necessária,
-pois o conteúdo é público. Alternativas possíveis, se a disciplina
-pedir mais robustez:
-
-- **gviz JSON:** endpoint `.../gviz/tq?tqx=out:json` retorna JSON
-  (exige outro parser).
-- **Apps Script:** um `doGet()` que responde JSON, para validar/limpar
-  os dados antes de exibir.
+- Leitura client-side, sem servidor próprio: `fetch()` do CSV de
+  exportação do Google Sheets + fallback JSONP no endpoint gviz
+  (`js/app.js`, funções `carregarSheetsCSV`, `carregarGviz`,
+  `normalizarLinhas`).
+- Parser CSV próprio (suporta campos entre aspas) — `parseCSV`.
+- Normalização tolerante a variações (acentos, caixa, sinônimos)
+  documentada na seção 2.
+- Alternativas consideradas e descartadas: Apps Script (exigiria
+  acesso de edição à planilha, que não temos) e proxy CORS de
+  terceiros (dependência externa desnecessária).

@@ -37,21 +37,24 @@ const CONFIG = {
   /* ============================================================
      FONTE DE DADOS DA VITRINE DE ADOÇÃO
      ------------------------------------------------------------
-     "local"  -> usa o array ANIMAIS definido em js/data.js
-                 (modo padrão; edite a lista ali para cadastrar
-                  ou remover animais).
+     "sheets" -> busca os animais direto da planilha Google
+                 Sheets (aba "Table 2" da microchipagem). Basta
+                 colar a URL normal da planilha abaixo — não é
+                 preciso "publicar na web". A planilha precisa
+                 estar compartilhada como "qualquer pessoa com
+                 o link pode visualizar".
 
-     "sheets" -> busca os animais direto de uma planilha
-                 Google Sheets publicada. Aponte a URL do CSV
-                 abaixo e siga docs/GOOGLE-SHEETS.md.
+     "local"  -> volta a usar o array ANIMAIS definido em
+                 js/data.js (plano B, caso a planilha saia do ar).
      ============================================================ */
-  fonteDeDados: "local",
+  fonteDeDados: "sheets",
 
   sheets: {
-    // URL do CSV publicado: na planilha, use
-    // Arquivo > Compartilhar > Publicar na web > selecione a
-    // aba "animais" e o formato "Valores separados por vírgula
-    // (.csv)" > copie o link gerado e cole aqui.
+    // URL da planilha (a mesma que você abre no navegador).
+    planilhaUrl: "https://docs.google.com/spreadsheets/d/1cQ8pMk6pxnSBTzmvZLC10VQQq6X9shiH/edit?gid=1524271065#gid=1524271065",
+
+    // Alternativa técnica: CSV publicado na web (deixe vazio
+    // enquanto estiver usando planilhaUrl). Veja docs/GOOGLE-SHEETS.md.
     csvUrl: "",
   },
 };
