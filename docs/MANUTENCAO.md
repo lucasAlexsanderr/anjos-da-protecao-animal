@@ -139,9 +139,9 @@ Edite os valores e salve.
 ## 6. Trocar cores, fontes e logotipo
 
 - **Cores:** no topo de `css/style.css` há o bloco `:root` com os
-  "tokens". Eles foram extraídos da logo oficial (magenta #E42E82,
-  creme #FAF3D3). Troque `--accent` e `--bg` para mudar a identidade
-  visual inteira de uma vez.
+  "tokens" (magenta #E42E82 sobre fundo rosado suave #FEF6F9).
+  Troque `--accent` e `--bg` para mudar a identidade visual inteira
+  de uma vez.
 - **Logotipo:** a logo oficial é `assets/img/logo.webp` — substitua
   esse arquivo (mantendo o nome) para trocar a marca do menu, do
   rodapé. O ícone da aba do navegador é `assets/img/favicon.svg`

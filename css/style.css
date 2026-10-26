@@ -1,7 +1,7 @@
 /* ============================================================
    ANJOS DA PROTEÇÃO ANIMAL — folha de estilo principal
    Design system:
-   - Paleta extraída da logo: magenta #E42E82, creme #FAF3D3
+   - Paleta extraída da logo: magenta #E42E82 sobre fundo rosado suave
    - Marca: Baloo 2 | Títulos: Fraunces | Corpo: DM Sans
    - Para trocar as cores do site, edite APENAS o bloco :root
    ============================================================ */
@@ -9,12 +9,12 @@
 /* ---------- Tokens (cores, fontes, espaçamentos) ---------- */
 /* Paleta extraída da logo oficial (assets/img/logo.webp) */
 :root {
-  --bg:        #FAF3D3;   /* fundo geral (creme da logo) */
+  --bg:        #FEF6F9;   /* fundo geral (branco rosado suave) */
   --surface:   #FFFFFF;   /* fundo de cards */
-  --surface-2: #EFE9D2;   /* faixas alternadas */
+  --surface-2: #FDECF4;   /* faixas alternadas */
   --ink:       #2B1A24;   /* texto principal (ameixa escura) */
-  --muted:     #7E7165;   /* texto secundário */
-  --border:    #DFD8B9;   /* bordas suaves */
+  --muted:     #75696E;   /* texto secundário */
+  --border:    #FBE2EE;   /* bordas suaves */
   --accent:    #E42E82;   /* magenta da logo: botões e destaques */
   --accent-strong: #B62467; /* magenta escuro (hover) */
   --accent-soft: #FBE1ED; /* fundo de destaque claro */
@@ -103,7 +103,7 @@ select:focus-visible, textarea:focus-visible {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(250, 243, 211, 0.94);
+  background: rgba(254, 246, 249, 0.94);
   border-bottom: 1px solid var(--border);
 }
 .topo-inner {
@@ -242,7 +242,7 @@ select:focus-visible, textarea:focus-visible {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-strong);
 }
 .ajudar-card p { color: var(--muted); font-size: 0.97rem; }
 .ajudar-card .btn { margin-top: auto; align-self: flex-start; }
@@ -507,7 +507,7 @@ select:focus-visible, textarea:focus-visible {
 /* ---------- Estado vazio de carregamento ---------- */
 .skeleton {
   border-radius: var(--radius);
-  background: linear-gradient(100deg, var(--surface-2) 40%, #FDFAEB 50%, var(--surface-2) 60%);
+  background: linear-gradient(100deg, var(--surface-2) 40%, #FDF2F8 50%, var(--surface-2) 60%);
   background-size: 200% 100%;
   animation: brilho 1.2s infinite;
   aspect-ratio: 4 / 5;
