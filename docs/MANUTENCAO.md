@@ -139,14 +139,17 @@ Edite os valores e salve.
 ## 6. Trocar cores, fontes e logotipo
 
 - **Cores:** no topo de `css/style.css` há o bloco `:root` com os
-  "tokens". Troque `--accent` (terracota) e `--bg` (creme) para mudar a
-  identidade visual inteira de uma vez.
-- **Logotipo:** substitua `assets/img/favicon.svg` pelo logo da ONG
-  (SVG quadrado recomendado). Ele é usado no menu, rodapé e aba do
-  navegador.
-- **Fontes:** as fontes (Fraunces e DM Sans) vêm do Google Fonts,
-  declaradas no `<head>` dos dois HTML. Troque o link e as variáveis
-  `--font-head` / `--font-body` no CSS.
+  "tokens". Eles foram extraídos da logo oficial (magenta #E42E82,
+  creme #FAF3D3). Troque `--accent` e `--bg` para mudar a identidade
+  visual inteira de uma vez.
+- **Logotipo:** a logo oficial é `assets/img/logo.webp` — substitua
+  esse arquivo (mantendo o nome) para trocar a marca do menu, do
+  rodapé. O ícone da aba do navegador é `assets/img/favicon.svg`
+  (recolore com a paleta).
+- **Fontes:** as fontes (Baloo 2 para a marca, Fraunces e DM Sans)
+  vêm do Google Fonts, declaradas no `<head>` dos dois HTML. Troque o
+  link e as variáveis `--font-marca` / `--font-head` / `--font-body`
+  no CSS.
 
 ---
 

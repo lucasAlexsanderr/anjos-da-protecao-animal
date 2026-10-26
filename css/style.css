@@ -1,28 +1,30 @@
 /* ============================================================
    ANJOS DA PROTEÇÃO ANIMAL — folha de estilo principal
    Design system:
-   - Fundo creme, acento terracota, texto marrom-tinta
-   - Títulos: Fraunces | Corpo: DM Sans
+   - Paleta extraída da logo: magenta #E42E82, creme #FAF3D3
+   - Marca: Baloo 2 | Títulos: Fraunces | Corpo: DM Sans
    - Para trocar as cores do site, edite APENAS o bloco :root
    ============================================================ */
 
 /* ---------- Tokens (cores, fontes, espaçamentos) ---------- */
+/* Paleta extraída da logo oficial (assets/img/logo.webp) */
 :root {
-  --bg:        #FAF6EF;   /* fundo geral */
+  --bg:        #FAF3D3;   /* fundo geral (creme da logo) */
   --surface:   #FFFFFF;   /* fundo de cards */
-  --surface-2: #F3ECDF;   /* faixas alternadas */
-  --ink:       #241C15;   /* texto principal */
-  --muted:     #6F6154;   /* texto secundário */
-  --border:    #E9DFD0;   /* bordas suaves */
-  --accent:    #E4572E;   /* terracota: botões e destaques */
-  --accent-strong: #C33F1B; /* terracota escuro (hover) */
-  --accent-soft: #FBE9E1; /* fundo de destaque claro */
+  --surface-2: #EFE9D2;   /* faixas alternadas */
+  --ink:       #2B1A24;   /* texto principal (ameixa escura) */
+  --muted:     #7E7165;   /* texto secundário */
+  --border:    #DFD8B9;   /* bordas suaves */
+  --accent:    #E42E82;   /* magenta da logo: botões e destaques */
+  --accent-strong: #B62467; /* magenta escuro (hover) */
+  --accent-soft: #FBE1ED; /* fundo de destaque claro */
   --green:     #2E6E4E;   /* status "adotado" / sucesso */
   --green-soft: #E7F1EA;
   --radius:    14px;
   --shadow:    0 2px 10px rgba(36, 28, 21, 0.06);
   --shadow-lift: 0 10px 28px rgba(36, 28, 21, 0.12);
   --font-head: "Fraunces", Georgia, serif;
+  --font-marca: "Baloo 2", var(--font-body);
   --font-body: "DM Sans", system-ui, sans-serif;
   --container: 1100px;
 }
@@ -101,7 +103,7 @@ select:focus-visible, textarea:focus-visible {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(250, 246, 239, 0.94);
+  background: rgba(250, 243, 211, 0.94);
   border-bottom: 1px solid var(--border);
 }
 .topo-inner {
@@ -116,9 +118,10 @@ select:focus-visible, textarea:focus-visible {
   align-items: center;
   gap: 0.6rem;
   text-decoration: none;
-  font-family: var(--font-head);
-  font-weight: 600;
+  font-family: var(--font-marca);
+  font-weight: 700;
   font-size: 1.25rem;
+  letter-spacing: 0.01em;
 }
 .marca img { width: 38px; height: 38px; }
 
@@ -331,7 +334,7 @@ select:focus-visible, textarea:focus-visible {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #F3A085;
+  color: #F08CBA;
   margin-bottom: 0.6rem;
 }
 .campanha-destaque h3 { font-family: var(--font-head); font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 600; }
@@ -504,7 +507,7 @@ select:focus-visible, textarea:focus-visible {
 /* ---------- Estado vazio de carregamento ---------- */
 .skeleton {
   border-radius: var(--radius);
-  background: linear-gradient(100deg, var(--surface-2) 40%, #FBF8F2 50%, var(--surface-2) 60%);
+  background: linear-gradient(100deg, var(--surface-2) 40%, #FDFAEB 50%, var(--surface-2) 60%);
   background-size: 200% 100%;
   animation: brilho 1.2s infinite;
   aspect-ratio: 4 / 5;
