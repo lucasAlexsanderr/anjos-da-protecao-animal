@@ -79,7 +79,25 @@ existente e cole no final da lista (antes do `];`). Ajuste os valores:
 Depois salve o arquivo e recarregue o site. Pronto — o animal aparece
 na home (prévia) e na página de adoção automaticamente.
 
-### 2.3 Marcar como adotado
+### 2.3 Fotos dos animais (manifesto FOTOS)
+
+A planilha não tem coluna de foto. O site usa um manifesto em
+`js/data.js` (objeto `FOTOS`) que registra quais animais têm foto
+"upada":
+
+1. Salve a foto em `assets/img/animais/` com o slug do animal
+   (nome em minúsculas, sem acentos, espaços viram hífen),
+   ex.: `teo.jpg`.
+2. Em `js/data.js`, adicione a linha ao objeto FOTOS:
+
+   `"teo": "assets/img/animais/teo.jpg",`
+
+Animais SEM registro mostram o placeholder, o aviso "Sem foto no
+site" no card e o botão "Adicionar fotografia" (que abre o WhatsApp
+da ONG com uma mensagem pronta — qualquer pessoa pode ajudar a
+enviar a foto).
+
+### 2.4 Marcar como adotado
 
 Não apague o animal: troque `"status": "disponivel"` por
 `"status": "adotado"`. Ele sai da vitrine e do filtro, mas o registro

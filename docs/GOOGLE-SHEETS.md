@@ -45,7 +45,9 @@ colunas e os valores, tolerando variações de grafia:
 | Comportamento       | DÓCIL/DOCIL → "Dócil e tranquilo(a)" · BRAVA/BRAVO → "Bravo(a)" · ARISCA/ARISCO → "Arisco(a)" · TEMPERAMENTAL |
 | Castração / Vacinação | SIM → chips "Castrado" / "Vacinado" no card              |
 | Cor                 | Chip adicional no card (ex.: "Rajada")                      |
-| Doença Crônica      | Se preenchida (e não for "NÃO"), entra na descrição: "precisa de acompanhamento veterinário: ..." |
+| Uso de medicação contínua | Se preenchida (e não for "NÃO"), vira o chip "Medicação: ..." no card |
+| Doença Crônica / demais colunas | **Não exibidas** (dado clínico sensível ou irrelevante para o público) |
+| Foto (não existe na planilha) | Controlada pelo manifesto `FOTOS` em `js/data.js`; sem registro → placeholder + aviso "Sem foto no site" + botão "Adicionar fotografia" |
 
 Regras de exclusão:
 

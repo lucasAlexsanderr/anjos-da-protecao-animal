@@ -71,8 +71,13 @@ async function carregarAnimais() {
     }
   }
 
-  // Modo local (padrão): dados do array ANIMAIS em js/data.js
-  _cacheAnimais = ANIMAIS;
+  // Modo local (plano B): dados do array ANIMAIS em js/data.js
+  _cacheAnimais = ANIMAIS.map((a) => ({
+    ...a,
+    slug: semAcento(a.nome).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""),
+    temFoto: a.temFoto ?? (a.foto ? !a.foto.includes("sem-foto") : false),
+    medicacao: a.medicacao ?? null,
+  }));
   return _cacheAnimais;
 }
 
@@ -160,7 +165,8 @@ function normalizarLinhas(cabecalho, linhas) {
   const iNome = col("nome"), iEsp = col("especie"), iSexo = col("sexo"),
         iIdade = col("idade"), iPorte = col("porte"), iCor = col("cor"),
         iComp = col("comportamento"), iCast = col("castracao"),
-        iVac = col("vacinacao"), iDoe = col("doenca cronica");
+        iVac = col("vacinacao"), iDoe = col("doenca cronica"),
+        iMed = col("uso de medicacao");
 
   const valor = (linha, i) => (i >= 0 && linha[i] != null) ? String(linha[i]).trim() : "";
 
@@ -196,23 +202,35 @@ function normalizarLinhas(cabecalho, linhas) {
     const doencaBruta = valor(linha, iDoe);
     const temDoenca = doencaBruta && !/^(nao|não)$/i.test(doencaBruta) && doencaBruta.length > 1;
 
-    const partes = [];
-    if (comportamento) partes.push(comportamento === "Dócil" ? "Dócil e tranquilo(a)" : comportamento);
-    if (temDoenca) partes.push("precisa de acompanhamento veterinário: " + doencaBruta);
-    const descricao = partes.join(" — ") || "Em avaliação de temperamento pela nossa equipe.";
+    /* Descrição exibida só o comportamento; dados clínicos (doença,
+       medicação) ficam restritos aos chips não sensíveis do card. */
+    const descricao = comportamento
+      ? (comportamento === "Dócil" ? "Dócil e tranquilo(a)" : comportamento)
+      : "Em avaliação de temperamento pela nossa equipe.";
 
     const cor = valor(linha, iCor);
 
+    // Medicação contínua: texto preenchido (ignora "NÃO")
+    const medicacaoBruta = valor(linha, iMed);
+    const medicacao = medicacaoBruta && !/^(nao|não)$/i.test(medicacaoBruta) ? medicacaoBruta : null;
+
+    // Foto: só existe se estiver registrada no manifesto FOTOS (js/data.js)
+    const slug = semAcento(nome).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    const fotoRegistrada = FOTOS[slug];
+
     animais.push({
       id: n + 1,
+      slug,
       nome: nome.toLowerCase().replace(/(^|\s)\S/g, (t) => t.toUpperCase()),
       especie, sexo, porte,
       idadeMeses, idadeRotulo,
       castrado: semAcento(valor(linha, iCast)).startsWith("s"),
       vacinado: semAcento(valor(linha, iVac)).startsWith("s"),
       cor: cor || null,
+      medicacao,
       descricao,
-      foto: `assets/img/animais/sem-foto-${especie}.svg`,
+      foto: fotoRegistrada || `assets/img/animais/sem-foto-${especie}.svg`,
+      temFoto: !!fotoRegistrada,
       status: "disponivel",
     });
   });
@@ -245,11 +263,10 @@ function parseCSV(texto) {
 
 /* ---------- Cards da vitrine ---------- */
 
-/* Monta a linha "idade · porte · sexo" tolerando campos ausentes. */
+/* Monta a linha "idade · sexo" tolerando campos ausentes. */
 function metaAnimal(a) {
   const partes = [];
   partes.push(a.idadeRotulo || idadeTexto(a.idadeMeses));
-  if (a.porte) partes.push(rotulo(a.porte));
   if (a.sexo) partes.push(rotulo(a.sexo));
   return partes.filter(Boolean).join(" · ");
 }
@@ -263,15 +280,22 @@ function cardAnimalHTML(a) {
     : "";
   const disponivel = a.status !== "adotado";
   const msg = `Olá! Vi o ${a.especie === "gato" ? "gato" : "cão"} ${a.nome} no site e gostaria de saber mais sobre a adoção. 💛`;
-  const acao = disponivel
-    ? `<a class="btn btn-primary btn-sm" target="_blank" rel="noopener"
-         href="https://wa.me/${CONFIG.contato.whatsapp}?text=${encodeURIComponent(msg)}">
-         Quero adotar</a>`
-    : `<span class="btn btn-ghost btn-sm" style="pointer-events:none">Já tem lar 💚</span>`;
+  const msgFoto = `Olá! Gostaria de ajudar enviando uma foto de ${a.nome} para o site. 📷`;
+  const acoes = [];
+  if (disponivel) {
+    acoes.push(`<a class="btn btn-primary btn-sm" target="_blank" rel="noopener"
+      href="https://wa.me/${CONFIG.contato.whatsapp}?text=${encodeURIComponent(msg)}">Quero adotar</a>`);
+  } else {
+    acoes.push(`<span class="btn btn-ghost btn-sm" style="pointer-events:none">Já tem lar 💚</span>`);
+  }
+  if (!a.temFoto) {
+    acoes.push(`<a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" title="Envie uma foto deste animal pelo WhatsApp"
+      href="https://wa.me/${CONFIG.contato.whatsapp}?text=${encodeURIComponent(msgFoto)}">Adicionar fotografia</a>`);
+  }
 
   return `
   <article class="card-animal reveal">
-    <div class="foto">${badge}<img src="${a.foto}" alt="Foto de ${a.nome}" loading="lazy"></div>
+    <div class="foto">${badge}<img src="${a.foto}" alt="${a.temFoto ? "Foto de " + a.nome : "Sem foto: " + a.nome}" loading="lazy"></div>
     <div class="corpo">
       <h3>${a.nome} <span class="meta">${rotulo(a.especie)}</span></h3>
       <p class="meta">${metaAnimal(a)}</p>
@@ -280,8 +304,10 @@ function cardAnimalHTML(a) {
         ${a.castrado ? "<span>Castrado</span>" : ""}
         ${a.vacinado ? "<span>Vacinado</span>" : ""}
         ${a.cor ? `<span>${capitalizar(a.cor)}</span>` : ""}
+        ${a.medicacao ? `<span>Medicação: ${capitalizar(a.medicacao)}</span>` : ""}
+        ${!a.temFoto ? '<span class="sem-foto">Sem foto no site</span>' : ""}
       </div>
-      ${acao}
+      <div class="card-acoes">${acoes.join("")}</div>
     </div>
   </article>`;
 }
@@ -327,24 +353,49 @@ function animalPassa(a, f) {
   return true;
 }
 
+/* Quantos cards renderizar por vez (lote) — evita sobrecarregar
+   a página com dezenas de cards de uma vez. */
+const LOTE_ADOCAO = 12;
+
 async function renderAdocao() {
   const alvo = document.querySelector("[data-vitrine-completa]");
   if (!alvo) return;
   const animais = await carregarAnimais();
   if (!animais.length) return;
 
-  function aplicar() {
-    const visiveis = animais.filter((a) => a.status !== "adotado" && animalPassa(a, filtrosEstado));
-    alvo.innerHTML = visiveis.length
-      ? visiveis.map(cardAnimalHTML).join("")
-      : `<div class="vazio" style="grid-column:1/-1">
-           <strong>Nenhum animal encontrado com esses filtros.</strong>
-           Tente ampliar a busca — novos resgatados chegam toda semana.
-         </div>`;
-    const info = document.querySelector("[data-contador]");
-    if (info) info.textContent = `${visiveis.length} ${visiveis.length === 1 ? "animal disponível" : "animais disponíveis"}`;
+  const btnMais = document.querySelector("[data-btn-carregar-mais]");
+  let visiveis = [], mostrados = 0;
+
+  /* Renderiza o próximo lote de cards (ou reinicia, se reset=true). */
+  function carregarLote(reset) {
+    if (reset) { alvo.innerHTML = ""; mostrados = 0; }
+    const fatia = visiveis.slice(mostrados, mostrados + LOTE_ADOCAO);
+    alvo.insertAdjacentHTML("beforeend", fatia.map(cardAnimalHTML).join(""));
+    mostrados += fatia.length;
+    if (btnMais) {
+      const restantes = visiveis.length - mostrados;
+      btnMais.hidden = restantes <= 0;
+      btnMais.textContent = restantes > 0
+        ? `Carregar mais animais (${restantes} ${restantes === 1 ? "restante" : "restantes"})`
+        : "Carregar mais animais";
+    }
     observarReveals();
   }
+
+  function aplicar() {
+    visiveis = animais.filter((a) => a.status !== "adotado" && animalPassa(a, filtrosEstado));
+    const info = document.querySelector("[data-contador]");
+    if (info) info.textContent = `${visiveis.length} ${visiveis.length === 1 ? "animal disponível" : "animais disponíveis"}`;
+    carregarLote(true);
+    if (!visiveis.length) {
+      alvo.innerHTML = `<div class="vazio" style="grid-column:1/-1">
+        <strong>Nenhum animal encontrado com esses filtros.</strong>
+        Tente ampliar a busca — novos resgatados chegam toda semana.
+      </div>`;
+    }
+  }
+
+  if (btnMais) btnMais.addEventListener("click", () => carregarLote(false));
 
   const busca = document.querySelector("[data-f-busca]");
   if (busca) busca.addEventListener("input", () => { filtrosEstado.busca = busca.value.trim().toLowerCase(); aplicar(); });

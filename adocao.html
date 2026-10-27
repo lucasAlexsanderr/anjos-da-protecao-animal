@@ -83,10 +83,14 @@
     <section style="padding-top:1rem">
       <div class="container">
         <p class="resultado-info" data-contador aria-live="polite">Carregando...</p>
-        <!-- Cards preenchidos automaticamente por js/app.js. -->
+        <!-- Cards preenchidos automaticamente por js/app.js, em lotes
+             (12 por vez) para não sobrecarregar a página. -->
         <div class="vitrine-grid" data-vitrine-completa>
           <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
           <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+        </div>
+        <div class="vitrine-rodape">
+          <button class="btn btn-outline" type="button" data-btn-carregar-mais hidden>Carregar mais animais</button>
         </div>
 
         <div style="margin-top:3rem;text-align:center">

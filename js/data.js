@@ -134,6 +134,37 @@ const ANIMAIS = [
 ];
 
 /* ============================================================
+   FOTOS DOS ANIMAIS (manifesto)
+   ------------------------------------------------------------
+   A vitrine consulta esta lista para saber se um animal tem
+   foto "upada" no site (e exibir o botão "Adicionar fotografia"
+   para quem ainda não tem).
+
+   Para adicionar uma foto:
+     1. Salve o arquivo em assets/img/animais/ (ex.: teo.jpg)
+     2. Adicione uma linha aqui apontando o "slug" do animal
+        (nome em minúsculas, sem acentos e espaços) para o arquivo.
+
+        "teo": "assets/img/animais/teo.jpg",
+
+   Animais da planilha que NÃO estão nesta lista mostram a imagem
+   placeholder e o botão "Adicionar fotografia" no card.
+   ============================================================ */
+
+const FOTOS = {
+  // ---- animais de demonstração (modo "local") ----
+  bidu: "assets/img/animais/bidu.svg",
+  luna: "assets/img/animais/luna.svg",
+  thor: "assets/img/animais/thor.svg",
+  mel: "assets/img/animais/mel.svg",
+  "ze-carioca": "assets/img/animais/ze-carioca.svg",
+  nina: "assets/img/animais/nina.svg",
+  fiona: "assets/img/animais/fiona.svg",
+  salem: "assets/img/animais/salem.svg",
+  // ---- adicione aqui as fotos reais dos animais da planilha ----
+};
+
+/* ============================================================
    CAMPANHAS EM ANDAMENTO
    ------------------------------------------------------------
    Cada campanha aparece na seção "Campanhas" da página inicial.
