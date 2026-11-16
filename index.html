@@ -104,7 +104,11 @@
               Sua doação vira ração, veterinário, medicação e castração.
               Chave Pix: <strong><span data-pix></span></strong>
             </p>
-            <button class="btn btn-outline btn-sm" type="button" data-copiar-pix>Copiar chave Pix</button>
+            <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+              <button class="btn btn-outline btn-sm" type="button" data-copiar-pix>Copiar chave Pix</button>
+              <!-- Aparece automaticamente quando CONFIG.doacao.vaquinhaUrl for preenchido -->
+              <a class="btn btn-primary btn-sm" data-vaquinha-link target="_blank" rel="noopener" hidden>Contribuir na vaquinha</a>
+            </div>
           </article>
           <article class="ajudar-card reveal">
             <p class="rotulo">Voluntariado</p>

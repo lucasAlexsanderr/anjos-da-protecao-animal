@@ -32,6 +32,11 @@ const CONFIG = {
   /* Doações --------------------------------------------------- */
   doacao: {
     pix: "contato@anjosdaprotecaoanimal.org.br",       // chave Pix: e-mail, telefone, CPF/CNPJ ou aleatória
+    // Link da vaquinha online (site vakinha.com.br).
+    // Preencha com a URL da vaquinha da ONG — o botão
+    // "Contribuir na vaquinha" aparece no card de doação
+    // automaticamente quando este campo estiver preenchido.
+    vaquinhaUrl: "",
   },
 
   /* ============================================================

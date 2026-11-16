@@ -543,6 +543,10 @@ function preencherInstitucional() {
   document.querySelectorAll("[data-cnpj]").forEach((el) => (el.textContent = CONFIG.ong.cnpj));
   document.querySelectorAll("[data-pix]").forEach((el) => (el.textContent = CONFIG.doacao.pix));
   document.querySelectorAll("[data-whatsapp-link]").forEach((el) => (el.href = `https://wa.me/${CONFIG.contato.whatsapp}`));
+  document.querySelectorAll("[data-vaquinha-link]").forEach((el) => {
+    if (CONFIG.doacao.vaquinhaUrl) { el.href = CONFIG.doacao.vaquinhaUrl; el.hidden = false; }
+    else el.remove();
+  });
 }
 
 /* ---------- Inicialização ---------- */

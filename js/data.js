@@ -161,7 +161,19 @@ const FOTOS = {
   nina: "assets/img/animais/nina.svg",
   fiona: "assets/img/animais/fiona.svg",
   salem: "assets/img/animais/salem.svg",
-  // ---- adicione aqui as fotos reais dos animais da planilha ----
+  // ---- fotos reais dos animais da planilha ----
+  // (extraídas do "Relatório de Resgate de Animais - ONG APA.pdf")
+  bia: "assets/img/animais/bia.jpg",
+  thomas: "assets/img/animais/thomas.jpg",
+  sobral: "assets/img/animais/sobral.jpg",
+  black: "assets/img/animais/black.jpg",
+  bela: "assets/img/animais/bela.jpg",
+  pirada: "assets/img/animais/pirada.jpg",
+  luisa: "assets/img/animais/luisa.jpg",
+  mell: "assets/img/animais/mell.jpg",
+  "preta-gil": "assets/img/animais/preta-gil.jpg",
+  margo: "assets/img/animais/margo.jpg",
+  isadora: "assets/img/animais/isadora.jpg",
 };
 
 /* ============================================================

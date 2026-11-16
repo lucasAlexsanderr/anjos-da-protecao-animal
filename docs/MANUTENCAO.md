@@ -142,6 +142,7 @@ Tudo fica em **um único arquivo: `js/config.js`**.
 | WhatsApp                | `CONFIG.contato.whatsapp` (55 + DDD + número)    |
 | Instagram / Facebook    | `CONFIG.contato.instagram` / `.facebook`         |
 | Chave Pix               | `CONFIG.doacao.pix`                              |
+| Vaquinha online (vakinha.com.br) | `CONFIG.doacao.vaquinhaUrl` — o botão "Contribuir na vaquinha" aparece no card de doação automaticamente quando preenchido |
 
 **Importante:** alguns textos "soltos" estão direto no HTML (ex.: o e-mail
 na seção de Contato e os links de redes no rodapé). Se trocar e-mail ou
