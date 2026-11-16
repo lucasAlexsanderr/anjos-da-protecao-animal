@@ -332,7 +332,17 @@ async function renderVitrine() {
   esqueletos.forEach((s) => s.remove());
   if (!animais.length) return;
 
-  const lista = limite ? animais.filter((a) => a.status !== "adotado").slice(0, limite) : animais.filter((a) => a.status !== "adotado");
+  /* Prévia da home: prioriza animais COM FOTO. Os que ainda não têm
+     foto só entram se não houver animais fotografados suficientes
+     para preencher os slots. (Sort estável: mantém a ordem original
+     dentro de cada grupo.) */
+  let lista = animais.filter((a) => a.status !== "adotado");
+  if (limite) {
+    lista = lista
+      .slice()
+      .sort((a, b) => (b.temFoto ? 1 : 0) - (a.temFoto ? 1 : 0))
+      .slice(0, limite);
+  }
   alvo.innerHTML = lista.map(cardAnimalHTML).join("");
   observarReveals();
 }

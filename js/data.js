@@ -151,16 +151,10 @@ const ANIMAIS = [
    placeholder e o botão "Adicionar fotografia" no card.
    ============================================================ */
 
+/* ATENÇÃO: liste aqui APENAS fotos REAIS dos animais da planilha.
+   Não cadastre placeholders — quem não tem foto deve aparecer como
+   "sem foto" (e ficar fora da prévia da home). */
 const FOTOS = {
-  // ---- animais de demonstração (modo "local") ----
-  bidu: "assets/img/animais/bidu.svg",
-  luna: "assets/img/animais/luna.svg",
-  thor: "assets/img/animais/thor.svg",
-  mel: "assets/img/animais/mel.svg",
-  "ze-carioca": "assets/img/animais/ze-carioca.svg",
-  nina: "assets/img/animais/nina.svg",
-  fiona: "assets/img/animais/fiona.svg",
-  salem: "assets/img/animais/salem.svg",
   // ---- fotos reais dos animais da planilha ----
   // (extraídas do "Relatório de Resgate de Animais - ONG APA.pdf")
   bia: "assets/img/animais/bia.jpg",
